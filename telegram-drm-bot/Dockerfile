@@ -1,14 +1,14 @@
-# Use an official Python runtime as a parent image
+# Use the official lightweight Python image
 FROM python:3.10-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     TZ=UTC
 
-# Create a working directory
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy project files into the container
+# Copy all project files into the container
 COPY . .
 
 # Install system dependencies
@@ -23,8 +23,8 @@ RUN chmod +x /usr/src/app/bin/*
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the application port (if needed)
-EXPOSE 80
+# Expose a port (if needed for future expansion)
+EXPOSE 8080
 
 # Command to run the bot
 CMD ["python", "bot.py"]
