@@ -19,7 +19,7 @@ async def ask_for_url(client, message):
     await message.reply("Please send the URL.")
     user_data[chat_id]['step'] = 'url'
 
-@bot.on_message(filters.text & ~filters.command)
+@bot.on_message(filters.text)
 async def collect_data(client, message):
     chat_id = message.chat.id
     if chat_id not in user_data or 'step' not in user_data[chat_id]:
@@ -27,22 +27,22 @@ async def collect_data(client, message):
 
     step = user_data[chat_id]['step']
 
-    if step == 'url':
+    if step == 'url' and not message.text.startswith('/'):
         user_data[chat_id]['url'] = message.text
         await message.reply("Please send the DRM key for the video.")
         user_data[chat_id]['step'] = 'video_key'
 
-    elif step == 'video_key':
+    elif step == 'video_key' and not message.text.startswith('/'):
         user_data[chat_id]['video_key'] = message.text
         await message.reply("Please send the DRM key for the audio.")
         user_data[chat_id]['step'] = 'audio_key'
 
-    elif step == 'audio_key':
+    elif step == 'audio_key' and not message.text.startswith('/'):
         user_data[chat_id]['audio_key'] = message.text
         await message.reply("Please provide a name for the output file (without extension).")
         user_data[chat_id]['step'] = 'file_name'
 
-    elif step == 'file_name':
+    elif step == 'file_name' and not message.text.startswith('/'):
         user_data[chat_id]['file_name'] = message.text
         await message.reply("Processing your request...")
         await process_request(client, chat_id)
