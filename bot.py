@@ -3,9 +3,9 @@ from pyrogram import Client, filters
 import subprocess
 
 # Initialize the bot
-api_id = "YOUR_API_ID"
-api_hash = "YOUR_API_HASH"
-bot_token = "YOUR_BOT_TOKEN"
+api_id = "13794728"
+api_hash = "25c1a5b45b981d601832905e220e16c7"
+bot_token = "7691929412:AAHtLk2-e_gVKfhN-9KHWZAxYv7m9_RT_8w"
 
 bot = Client("drm_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
